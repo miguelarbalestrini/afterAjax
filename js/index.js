@@ -1,5 +1,6 @@
 let pokeID = $("#pokeID");
-const APIURL = 'http://pokeapi.co/api/v2/pokemon/';
+const APIURL = 'https://pokeapi.co/api/v2/pokemon/';
+
 
 const getData = (pokemon) => {
     $.ajax({
@@ -22,7 +23,6 @@ const getData = (pokemon) => {
 
 $(document).ready(function () {
     //Declaramos la url del API
-    // getTestData();
     //Agregamos un botón con jQuery
     //Escuchamos el evento click del botón agregado
     // getData();
@@ -30,7 +30,6 @@ $(document).ready(function () {
 
 let counter = 0;
 const renderData = (pokemon) => {
-    console.log(pokemon, 'DATA');
     if (pokemon != undefined) {
         const pokedex = $('#pokedex');
         pokedex.prepend(`
