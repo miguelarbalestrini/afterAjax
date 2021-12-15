@@ -5,14 +5,18 @@ const getData = (pokemon) => {
     $.ajax({
         method: "GET",
         url: APIURL + `${pokemon}/`,
-        success: function (respuesta) {
+        success: (respuesta) => {
             // console.log(respuesta);
             // console.log(respuesta.sprites.front_default);
             // $("body").prepend(`<img src='${respuesta.sprites.front_default}'></img>`);
-            // data = JSON.parse(respuesta); 
-            console.log(respuesta);
-            renderData(respuesta);
+            // data = JSON.parse(respuesta);
+            renderData((respuesta));
         },
+        error: (state, responseText) => {
+            console.log(state);
+            alert(` ${responseText}, El server respondió con ${state.status}`)
+
+        }
     });
 }
 
@@ -29,7 +33,7 @@ const renderData = (pokemon) => {
     console.log(pokemon, 'DATA');
     if (pokemon != undefined) {
         const pokedex = $('#pokedex');
-        pokedex.append(`
+        pokedex.prepend(`
         <div class="card" style="width: 18rem;">
             <img src="${pokemon.sprites.front_default}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -48,10 +52,10 @@ const renderData = (pokemon) => {
 $('#render').click(() => {
     console.log(pokeID[0].value, 'VALUE')
     let pokemonID = Number(pokeID[0].value);
-    if (Number.isInteger(pokemonID)) {
+    if (Number.isInteger(pokemonID) && pokemonID > 0 && pokemonID < 899) {
         getData(pokemonID);
     }
     else {
-        alert("Tiene que ser un número!");
+        alert("Tiene que ser un entero entre 1 y 898!");
     }
 });
