@@ -7,7 +7,7 @@ const getDataAjax = () => {
         method: "GET",
         url: APIURL,
         success: (respuesta) => {
-            console.log(respuesta);
+            console.log(respuesta, 'RESPUESTA CON AJAX');
         },
         error: (state, responseText) => {
             console.log(state);
@@ -19,6 +19,13 @@ const getDataAjax = () => {
         }
     });
 }
+
+$().ready(function () {
+    //Declaramos la url del API
+    //Agregamos un botón con jQuery
+    //Escuchamos el evento click del botón agregado
+    getDataAjax();
+});
 
 const getDataFetch = (pokemon) => {
     fetch(`${APIURL}${pokemon}`)
@@ -50,14 +57,6 @@ const getDataFetchAsync = async (pokemon) => {
     }
 }
 
-$(document).ready(function () {
-    //Declaramos la url del API
-    //Agregamos un botón con jQuery
-    //Escuchamos el evento click del botón agregado
-    // getDataAjax();
-});
-
-let counter = 0;
 const renderData = (pokemon) => {
     if (pokemon != undefined) {
         const pokedex = document.getElementById('pokedex');
